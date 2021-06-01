@@ -34,18 +34,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.661" />
+        app:layout_constraintVertical_bias="0.697" />
 
     <ScrollView
         android:id="@+id/ConsoleOutput"
-        android:layout_width="300dp"
-        android:layout_height="288dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="226dp"
+        android:layout_height="165dp"
         app:layout_constraintBottom_toTopOf="@+id/ControlMining"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Threads_Number">
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
             android:id="@+id/ResultOutput"
@@ -58,14 +55,12 @@
         android:id="@+id/Threads_Number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="360dp"
+        android:layout_marginBottom="28dp"
         android:ems="10"
         android:hint="N of threads"
         android:inputType="number"
         android:windowSoftInputMode="adjustPan"
-        app:layout_constraintBottom_toTopOf="@+id/ControlMining"
+        app:layout_constraintBottom_toTopOf="@+id/ConsoleOutput"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.988" />
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
