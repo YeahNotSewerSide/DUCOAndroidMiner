@@ -73,7 +73,7 @@ class MiningThread extends Thread{
         Socket client_socket;
         String ip = "51.15.127.80";
 
-        int port = 2811;
+        int port = 2813;
         SocketAddress address = new InetSocketAddress(ip,port);
         TextView to_add;
 
