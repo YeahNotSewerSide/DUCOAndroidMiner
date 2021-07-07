@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import org.json.JSONObject;
 
 class WatcherThread extends Thread{
     MainActivity mactivity;
@@ -38,10 +39,14 @@ class WatcherThread extends Thread{
 
 
 
+
 class MiningThread extends Thread{
     MainActivity mactivity;
     String username;
     int thread_id;
+    String ip = "51.15.127.80";
+    Integer port = 2813;
+
     MiningThread(MainActivity act, String username, int thread_id){
         this.mactivity = act;
         this.username = username;
@@ -64,16 +69,49 @@ class MiningThread extends Thread{
         }
         return data;
     }
+    public void get_pool(){
+        URL url;
+        HttpURLConnection con;
+        String inputLine;
+        StringBuffer content = new StringBuffer();
+        try {
+            url = new URL("https://server.duinocoin.com/getPool");
+            con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("GET");
 
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()));
+            while ((inputLine = in.readLine()) != null) {
+                content.append(inputLine);
+            }
+            in.close();
+        }catch(Exception e) {
+            return;
+        }
+        String content_string = content.toString();
+        JSONObject json_response;
+        try {
+            json_response = new JSONObject(content_string);
+        }catch(Exception e){
+            return;
+        }
+        try {
+            ip = (String)json_response.get("ip");
+            port = Integer.parseInt((String)json_response.get("port"));
+        }catch(Exception e){
+            return;
+        }
+
+    }
     public void run(){
         boolean connected = false;
         OutputStream output;
         PrintWriter writer;
         InputStream input;
         Socket client_socket;
-        String ip = "51.15.127.80";
 
-        int port = 2813;
+        get_pool();
+
         SocketAddress address = new InetSocketAddress(ip,port);
         TextView to_add;
 
@@ -93,9 +131,9 @@ class MiningThread extends Thread{
                 client_socket.connect(address,15*1000);
             }catch(Exception e){
                 //mactivity.add_string_to_console(e.toString());
-                //mactivity.add_string_to_console("Connection Failed");
                 continue;
             }
+
             //mactivity.add_string_to_console("Connected to server");
 
             connected = true;
@@ -119,6 +157,7 @@ class MiningThread extends Thread{
 
             while(connected){
                 received_data = new byte[1024];
+
                 try {
                     output.write(job_query.getBytes("UTF-8"));
                 }catch(Exception e){
@@ -139,7 +178,15 @@ class MiningThread extends Thread{
 
                 Job = new String(received_data);
                 try {
-                    Job = Job.substring(0, this.get_position(Job, '\n'));
+                    Integer end_pos = this.get_position(Job, '\n');
+                    if(end_pos!=-1) {
+                        Job = Job.substring(0, end_pos);
+                    }else{
+                        end_pos = this.get_position(Job, '\0');
+                        if(end_pos!=-1) {
+                            Job = Job.substring(0, end_pos);
+                        }
+                    }
                 }catch(Exception e){
                     connected = false;
                     break;
