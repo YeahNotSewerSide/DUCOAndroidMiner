@@ -44,7 +44,7 @@ Main points of the license(1.0, 1.1, 1.2):
 
 1.0 All files with source code and release files(the "Software") can be freely(with some restrictions, read 1.1) obtained, copied, published and modified.
 
-1.1 LICENSE has to be always included in the Software in any human readable form and it cannot be changed. ads cannot be included in the Software in any sape or form.
+1.1 LICENSE has to be always included in the Software in any human readable form and it cannot be changed. ads cannot be included in the Software in any shape or form.
 
     GUI and the Hashing algorithm can be changed, but they cannot be modified to contain ads. Software cannot be modified to use any other protocol except 
     
