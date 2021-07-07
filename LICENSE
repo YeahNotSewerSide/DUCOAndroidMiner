@@ -6,7 +6,8 @@ Copyright 2021 DoctorEenot
 
 "LICENSE" - all human readable content of that file.
 
-"main server" - Main server of DUINO-Coin, address of main server can be obtained from "https://github.com/revoxhere/duino-coin/blob/gh-pages/serverip.txt"
+"main server" - Main server of DUINO-Coin, address of main server can be obtained from "https://github.com/revoxhere/duino-coin/blob/gh-pages/serverip.txt" and 
+    from "https://server.duinocoin.com/getPool"
 
 "JOBS" - data received from main server.
 
