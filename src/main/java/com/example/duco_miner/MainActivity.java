@@ -97,7 +97,7 @@ class MiningThread extends Thread{
         }
         try {
             ip = (String)json_response.get("ip");
-            port = Integer.parseInt((String)json_response.get("port"));
+            port = (Integer)json_response.get("port");
         }catch(Exception e){
             return;
         }
